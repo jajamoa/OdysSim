@@ -109,7 +109,7 @@ Supported tasks: `sotopia`, `coser`, `lifechoices`, `userllm`,
 `mirrorbench`, `fantom`, `hitom`, `paratomi`, `mistakes`, `twinvoice`,
 `social_r1`, `behaviorchain`, `sim_math`, `sim_doc`,
 `humanual_{book,chat,email,news,opinion,politics}`, `alignx`,
-`socsci210`, `humanllm`.
+`socsci210`, `humanllm`, `hugagent_{bsi,bdu}`.
 
 [//]: # (<div align="center">)
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Eval-only run across the full SOUL eval suite (27 tasks).
+# Eval-only run across the full SOUL eval suite (29 tasks).
 #
 # Usage:
 #   bash recipe/ditto/eval.sh local   # eval a local checkpoint via vLLM
@@ -40,7 +40,9 @@ $eval_dir/alignx_ugc_val.parquet,\
 $eval_dir/alignx_arbitrary_val.parquet,\
 $eval_dir/alignx_history16_val.parquet,\
 $eval_dir/socsci210_val.parquet,\
-$eval_dir/humanllm_val.parquet]"
+$eval_dir/humanllm_val.parquet,\
+$eval_dir/hugagent_bsi_val.parquet,\
+$eval_dir/hugagent_bdu_val.parquet]"
 
 # ── Mode: pick which model to evaluate ────────────────────────────────────────
 case "$MODE" in

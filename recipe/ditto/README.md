@@ -27,7 +27,7 @@ contains the full TASK → (train, val) mapping. Supported tasks:
 sotopia, coser, lifechoices, userllm, mirrorbench, fantom, hitom, paratomi,
 mistakes, twinvoice, social_r1, behaviorchain, sim_math, sim_doc,
 humanual_{book,chat,email,news,opinion,politics},
-alignx, socsci210, humanllm
+alignx, socsci210, humanllm, hugagent_{bsi,bdu}
 ```
 
 ## RL training (per-task)
