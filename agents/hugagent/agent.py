@@ -34,6 +34,9 @@ Two single-turn tasks, routed by `task_type` on the row:
     5-point scale or <= 2 on a 10-point scale, else 0. The normalized error
     1 - |pred - gold| / span is logged as hugagent/norm_acc.
 
+The released items are evaluation only (every row carries split="test"); the
+agent raises if asked to run such a row in training mode.
+
 Expected fields in data["extra_info"] (one HugAgent item, see the dataset card):
     task_type, topic, demographics (dict), context_qas (list of {question, answer}),
     task_question, answer_options (dict, BSI), answer (BSI),
@@ -171,6 +174,9 @@ def compute_reward(pred: Optional[Any], row: dict[str, Any], task: str) -> tuple
 async def agent_loop(data: dict, context):
     """HugAgent single-turn prediction (belief state inference or belief dynamics update)."""
     row = data["extra_info"]
+    if getattr(context, "is_train", False) and str(row.get("split", "")).lower() == "test":
+        # The released HugAgent items are a test set only. Refuse to use them as RL training data.
+        raise ValueError("HugAgent rows with split='test' are evaluation only and must not be used for training.")
     task, system_prompt, user_prompt = build_prompt(row)
     chat = [
         {"role": "system", "content": system_prompt},
