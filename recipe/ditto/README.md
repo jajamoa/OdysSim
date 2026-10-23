@@ -27,7 +27,7 @@ contains the full TASK → (train, val) mapping. Supported tasks:
 sotopia, coser, lifechoices, userllm, mirrorbench, fantom, hitom, paratomi,
 mistakes, twinvoice, social_r1, behaviorchain, sim_math, sim_doc,
 humanual_{book,chat,email,news,opinion,politics},
-alignx, socsci210, humanllm, hugagent_{bsi,bdu}
+alignx, socsci210, humanllm
 ```
 
 ## RL training (per-task)
@@ -57,6 +57,37 @@ Hyperparameters (LoRA, GRPO clip, batch sizes, etc.) match the top-level
 modes — evaluate any local checkpoint you trained, or evaluate a remote
 API model (Claude, GPT, or any OpenAI-compatible endpoint), or any
 open-source model on HF, all against the same task suite.
+
+### HugAgent (evaluation only)
+
+Set `INCLUDE_HUGAGENT=1` to add `hugagent_bsi` (356 items) and
+`hugagent_bdu` (1,386 items) to the default 27-task suite. These files are
+distributed separately in the gated, CC BY-NC 4.0 dataset
+[`social-atoms/hugagent`](https://huggingface.co/datasets/social-atoms/hugagent).
+Accept the access terms on that page, log in to Hugging Face, and download:
+
+```bash
+huggingface-cli login
+huggingface-cli download social-atoms/hugagent \
+  odyssim/hugagent_bsi_val.parquet odyssim/hugagent_bdu_val.parquet \
+  --repo-type dataset --local-dir data/hugagent
+
+INCLUDE_HUGAGENT=1 bash recipe/ditto/eval.sh local
+# Or, after configuring the API model:
+INCLUDE_HUGAGENT=1 bash recipe/ditto/eval.sh api
+```
+
+By default the files are read from `$DATA_DIR/hugagent/odyssim`
+(`data/hugagent/odyssim` when `DATA_DIR` is unset). To use an existing download,
+set `HUGAGENT_DATA_DIR` to the directory containing both parquet files. The
+script checks that both exist before starting evaluation. Without
+`INCLUDE_HUGAGENT=1`, the original 27-task suite requires no HugAgent download.
+
+The released rows have `split=test` and must not be used for training. Scores
+are BSI exact-match accuracy and BDU tolerance accuracy (within 1 on a 5-point
+scale or 2 on a 10-point scale), averaged over items in each task. Answers must
+be inside `<answer>...</answer>` tags; unparsed responses receive zero. These
+task scores are not the paper's composite ATI score.
 
 ### Local checkpoints (via vLLM)
 

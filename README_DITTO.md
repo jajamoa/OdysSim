@@ -109,7 +109,7 @@ Supported tasks: `sotopia`, `coser`, `lifechoices`, `userllm`,
 `mirrorbench`, `fantom`, `hitom`, `paratomi`, `mistakes`, `twinvoice`,
 `social_r1`, `behaviorchain`, `sim_math`, `sim_doc`,
 `humanual_{book,chat,email,news,opinion,politics}`, `alignx`,
-`socsci210`, `humanllm`, `hugagent_{bsi,bdu}`.
+`socsci210`, `humanllm`.
 
 [//]: # (<div align="center">)
 
@@ -120,6 +120,11 @@ Supported tasks: `sotopia`, `coser`, `lifechoices`, `userllm`,
 
 
 ## Evaluation
+
+The optional `hugagent_bsi` and `hugagent_bdu` tasks are evaluation only.
+See the [HugAgent setup](recipe/ditto/README.md#hugagent-evaluation-only) for
+the separate gated download and `INCLUDE_HUGAGENT=1` invocation of
+`recipe/ditto/eval.sh`.
 
 <div align="center">
   <img src="assets/soul.png" alt="Soul" width="100%">

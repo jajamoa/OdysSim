@@ -206,7 +206,7 @@ Supported tasks: `sotopia`, `coser`, `lifechoices`, `userllm`,
 `mirrorbench`, `fantom`, `hitom`, `paratomi`, `mistakes`, `twinvoice`,
 `social_r1`, `behaviorchain`, `sim_math`, `sim_doc`,
 `humanual_{book,chat,email,news,opinion,politics}`, `alignx`, `socsci210`,
-`humanllm`, `hugagent_{bsi,bdu}`.
+`humanllm`.
 
 ## Evaluation
 
@@ -217,6 +217,12 @@ Supported tasks: `sotopia`, `coser`, `lifechoices`, `userllm`,
 `recipe/ditto/eval.sh` runs the full 27-task SOUL evaluation suite in two
 modes: **local** for a checkpoint or open-source HF model via vLLM, and
 **api** for any OpenAI-compatible endpoint.
+
+HugAgent adds two optional evaluation-only tasks, `hugagent_bsi` and
+`hugagent_bdu`. Its gated parquets require a separate download from
+`social-atoms/hugagent`; they are not in `sim-eval-data`. Follow the
+[HugAgent setup](recipe/ditto/README.md#hugagent-evaluation-only), then run
+`INCLUDE_HUGAGENT=1 bash recipe/ditto/eval.sh local` (or `api`).
 
 ```bash
 # Eval the released Ditto-8B checkpoint

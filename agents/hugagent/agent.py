@@ -177,6 +177,11 @@ async def agent_loop(data: dict, context):
     if getattr(context, "is_train", False) and str(row.get("split", "")).lower() == "test":
         # The released HugAgent items are a test set only. Refuse to use them as RL training data.
         raise ValueError("HugAgent rows with split='test' are evaluation only and must not be used for training.")
+    if row.get("index") is None:
+        # The published parquets carry item_id, but no index. Also support
+        # callers that invoke the agent directly without RLHFDataset.
+        row = {**row, "index": row["item_id"]}
+        data = {**data, "extra_info": row}
     task, system_prompt, user_prompt = build_prompt(row)
     chat = [
         {"role": "system", "content": system_prompt},
