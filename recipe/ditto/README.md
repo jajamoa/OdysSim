@@ -70,7 +70,7 @@ Accept the access terms on that page, log in to Hugging Face, and download:
 huggingface-cli login
 huggingface-cli download social-atoms/hugagent \
   odyssim/hugagent_bsi_val.parquet odyssim/hugagent_bdu_val.parquet \
-  --repo-type dataset --local-dir data/hugagent
+  --repo-type dataset --revision data-v1.1 --local-dir data/hugagent
 
 INCLUDE_HUGAGENT=1 bash recipe/ditto/eval.sh local
 # Or, after configuring the API model:
@@ -82,6 +82,8 @@ By default the files are read from `$DATA_DIR/hugagent/odyssim`
 set `HUGAGENT_DATA_DIR` to the directory containing both parquet files. The
 script checks that both exist before starting evaluation. Without
 `INCLUDE_HUGAGENT=1`, the original 27-task suite requires no HugAgent download.
+Data version `data-v1.1` (2026-10-28) corrects 54 `hugagent_bdu` zoning items
+whose gold answer was 0; a download made before that date must be repeated.
 
 The released rows have `split=test` and must not be used for training. Scores
 are BSI exact-match accuracy and BDU tolerance accuracy (within 1 on a 5-point
